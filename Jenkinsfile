@@ -17,7 +17,7 @@ pipeline {
          }
          post{
              success {
-              echo 'Build succes...'
+              echo 'Clean and Compile succes...'
               }
             }
         }
@@ -28,13 +28,13 @@ pipeline {
           post{
               success{
                   emailext body: 'Deploy do Framework realizado com sucesso.', 
-                  subject: 'Deploy Nexus', 
+                  subject: 'Deploy Nexus - $BUILD_STATUS', 
                   to: 'henrique.galli@atomicsolutions.com.br'
                   
               }
               failure{
                   emailext body: 'Deploy do Framework não foi realizado.', 
-                  subject: 'Deploy Nexus', 
+                  subject: 'Deploy Nexus - $BUILD_STATUS', 
                   to: 'henrique.galli@atomicsolutions.com.br'
               }
           } 
