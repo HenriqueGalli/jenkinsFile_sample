@@ -28,7 +28,7 @@ pipeline {
            }
           post{
               success{
-                  emailext body: 'Deploy do Framework realizado com sucesso.\n Nova versao do projeto: ${project.version}', 
+                  emailext body: 'Deploy do Framework realizado com sucesso.\n Nova versao do projeto: $PROJECT.VERSION', 
                   subject: 'Deploy Nexus - $BUILD_STATUS', 
                   to: 'henrique.galli@atomicsolutions.com.br'
                   
