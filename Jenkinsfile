@@ -23,7 +23,7 @@ pipeline {
         }
       stage('Deploy'){
           steps{
-                 bat 'mvn deploy' //org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate \-Dexpression=project.version 
+                 bat 'mvn org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version -q -DforceStdout'' deploy' //org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate \-Dexpression=project.version 
            }
           post{
               success{
@@ -33,7 +33,7 @@ pipeline {
                   
               }
               failure{
-                  emailext body: 'Deploy do Framework nao foi realizado. \nAnalisar resultados: $BUILD_URL. \n Versao do projeto: $'bat'mvn org.apache.maven.plugins:maven-help-plugin:3.2.0:evaluate -Dexpression=project.version -q -DforceStdout'',                                                            
+                  emailext body: 'Deploy do Framework nao foi realizado. \nAnalisar resultados: $BUILD_URL. \nVersao do projeto: $PROJECT_VERSION',                                                            
                   subject: 'Deploy Nexus - $BUILD_STATUS', 
                   to: 'henrique.galli@atomicsolutions.com.br'
               }
