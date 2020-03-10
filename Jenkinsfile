@@ -23,11 +23,12 @@ pipeline {
         }
       stage('Deploy'){
           steps{
-                 bat 'mvn deploy' 
+                 bat 'mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate \
+    -Dexpression=project.version deploy' 
            }
           post{
               success{
-                  emailext body: 'Deploy do Framework realizado com sucesso.', 
+                  emailext body: 'Deploy do Framework realizado com sucesso.\n Nova versao do projeto: ${project.version}', 
                   subject: 'Deploy Nexus - $BUILD_STATUS', 
                   to: 'henrique.galli@atomicsolutions.com.br'
                   
