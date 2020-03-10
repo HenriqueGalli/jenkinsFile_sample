@@ -23,8 +23,7 @@ pipeline {
         }
       stage('Deploy'){
           steps{
-                 bat 'mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate \
-    -Dexpression=project.version deploy' 
+                 bat 'mvn deploy' //org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate \-Dexpression=project.version 
            }
           post{
               success{
