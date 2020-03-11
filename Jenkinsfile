@@ -23,7 +23,7 @@ pipeline {
         }
       stage('Deploy'){
           steps{
-                 bat 'mvn deploy' //org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate \-Dexpression=project.version 
+                 bat 'mvn deploy:POM_VERSION=$org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version' 
            }
           post{
               success{
@@ -33,7 +33,7 @@ pipeline {
                   
               }
               failure{
-                  emailext body: 'Deploy do Framework nao foi realizado. \nAnalisar resultados: $BUILD_URL.',                                                            
+                  emailext body: 'Deploy do Framework nao foi realizado. \nAnalisar resultados: $BUILD_URL.\n Versao: $POM_VERSION',                                                            
                   subject: 'Deploy Nexus - $BUILD_STATUS', 
                   to: 'henrique.galli@atomicsolutions.com.br'
               }
