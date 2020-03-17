@@ -13,7 +13,7 @@ pipeline {
          steps {
             // Get some code from a GitHub repository
             git url: 'https://github.com/HenriqueGalli/maven-project'
-            bat 'mvn clean org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=POM_VERSION compile package' 
+            bat 'mvn clean compile package' 
          }
          post{
              success {
