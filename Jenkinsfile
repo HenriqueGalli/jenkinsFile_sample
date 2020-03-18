@@ -15,7 +15,7 @@ pipeline {
             git url: 'https://github.com/HenriqueGalli/maven-project'
             
             bat 'mvn clean compile package' 
-            bat 'mvn -B release:prepare release:perform'
+            bat 'mvn -B release:perform'
          }
          post{
              success {
