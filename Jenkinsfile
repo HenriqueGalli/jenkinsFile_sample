@@ -13,9 +13,9 @@ pipeline {
          steps {
             // Get some code from a GitHub repository
             git url: 'https://github.com/HenriqueGalli/maven-project'
-            
+            bat 'mvn -X release:prepare release:perform'
             bat 'mvn clean compile package' 
-            bat 'mvn -B release:perform'
+          
          }
          post{
              success {
