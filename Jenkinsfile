@@ -13,7 +13,7 @@ pipeline {
          steps {
             // Get some code from a GitHub repository
             git url: 'https://github.com/HenriqueGalli/maven-project'
-            bat 'mvn release:update-versions -DautoVersionSubmodules=true '  //versions:set -DnewVersion=
+           // bat 'mvn release:update-versions -DautoVersionSubmodules=true '  //versions:set -DnewVersion=
             bat 'mvn clean compile package' 
           
          }
