@@ -12,7 +12,7 @@ pipeline {
       stage('Build') {
          steps {
             git url: 'https://github.com/HenriqueGalli/maven-project'
-            bat 'mvn versions:set -DnewVersion= release:update-versions -DautoVersionSubmodules=true '  //
+           // bat 'mvn versions:set -DnewVersion= release:update-versions -DautoVersionSubmodules=true '  //
             bat 'mvn clean compile package' 
           
          }
