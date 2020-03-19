@@ -31,13 +31,13 @@ pipeline {
               success{
                   emailext body: 'Deploy do Framework realizado com sucesso.\n', 
                   subject: 'Deploy Nexus - $BUILD_STATUS', 
-                  to: 'henrique.galli@atomicsolutions.com.br'
+                  to: '$DEFAULT_RECIPIENTS'
                   
               }
               failure{
                   emailext body: 'Deploy do Framework nao foi realizado. \nAnalisar resultados: $BUILD_URL.\n',                                                            
                   subject: 'Deploy Nexus - $BUILD_STATUS', 
-                  to: 'henrique.galli@atomicsolutions.com.br'
+                  to: '$DEFAULT_RECIPIENTS'
               }
           } 
       }
