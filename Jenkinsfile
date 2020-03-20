@@ -12,7 +12,8 @@ pipeline {
       stage('Build') {
          steps {
             git url: 'https://github.com/HenriqueGalli/DeploySnap.git'
-            bat  'mvn versions:set -DnewVersion=release:update-versions-DautoVersionSubmodules=false'                                     //'  '  //
+            bat 'mvn versions:set -DnewVersion=release:update-versions-DautoVersionSubmodules=true'   
+            bat 'mvn versions:commit'                                
             bat 'mvn clean compile package' 
           
          }
