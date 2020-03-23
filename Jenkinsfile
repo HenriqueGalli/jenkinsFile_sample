@@ -23,7 +23,7 @@ pipeline {
         }
       stage('Get Version'){
           steps{
-              bat "mvn -N help:effective-pom -Doutput"
+              //bat "mvn -N help:effective-pom -Doutput"
              script{
                  projectVersion = pom.getVersion()  
                 }        
