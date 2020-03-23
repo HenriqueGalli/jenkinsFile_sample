@@ -13,8 +13,10 @@ pipeline {
     stages{
       stage('Build') {
          steps {
-            git url: 'https://github.com/HenriqueGalli/DeploySnap.git'   
-            projectVersion = pom.getVersion()  
+            git url: 'https://github.com/HenriqueGalli/DeploySnap.git' 
+            script{
+                projectVersion = pom.getVersion()  
+            }        
             bat 'mvn clean compile package' 
             bat' mvn help:evaluate -Dexpression=project.version -q -DforceStdout'           
          }
