@@ -49,7 +49,7 @@ pipeline {
            }
           post{
               success{
-                  emailext body:'${TAG_SELECTOR}'//<p> ${ENV, var="TAG_SELECTOR"}</p>                              
+                  emailext body:'${TAG_SELECTOR}',//<p> ${ENV, var="TAG_SELECTOR"}</p>                              
                   subject: 'Deploy Nexus - $BUILD_STATUS', 
                   to: 'henrique.galli@atomicsolutions.com.br'
                   
