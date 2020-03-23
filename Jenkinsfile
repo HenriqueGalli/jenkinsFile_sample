@@ -21,7 +21,7 @@ pipeline {
          post{
              success {
               echo 'Clean and Compile succes...'
-              echo "${projectVersion}"
+              //echo "${projectVersion}"
               }
             }
         }
