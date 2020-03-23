@@ -12,7 +12,7 @@ pipeline {
       stage('Build') {
          steps {
             git url: 'https://github.com/HenriqueGalli/DeploySnap.git'     
-            bat 'mvn help:evaluate -Dexpression=docker.registry -q -DforceStdout'      
+            bat 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout'    
             bat 'mvn clean compile package' 
          }
          post{
