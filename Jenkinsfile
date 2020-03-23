@@ -27,7 +27,7 @@ pipeline {
            }
           post{
               success{
-                  emailext body: 'Deploy do Framework realizado com sucesso.\n 'bat 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout''', 
+                  emailext body: 'Deploy do Framework realizado com sucesso.\n 'bat' mvn help:evaluate -Dexpression=project.version -q -DforceStdout', 
                   subject: 'Deploy Nexus - $BUILD_STATUS', 
                   to: 'henrique.galli@atomicsolutions.com.br'
                   
