@@ -5,7 +5,7 @@ pipeline {
    tools {
     maven 'localMaven'
     pom = readMavenPom file: 'pom.xml'
-    //pom.version
+    pom.version
    }
     triggers{
         pollSCM('* * * * *')
