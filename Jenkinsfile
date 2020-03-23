@@ -10,17 +10,15 @@ pipeline {
     triggers{
         pollSCM('* * * * *')
     }
-     environment {
-      git url = 'https://github.com/HenriqueGalli/DeploySnap.git' 
-      IMAGE = readMavenPom().getArtifactId()
-      VERSION = readMavenPom().getVersion()
-    }
+
     stages{
       stage('Build') {
          steps {
-            git url: 'https://github.com/HenriqueGalli/DeploySnap.git'           
+            git url: 'https://github.com/HenriqueGalli/DeploySnap.git'                  
             bat 'mvn clean compile package' 
-            bat' mvn help:evaluate -Dexpression=project.version -q -DforceStdout'           
+            IMAGE = readMavenPom().getArtifactId()
+            VERSION = readMavenPom().getVersion()   
+            //bat' mvn help:evaluate -Dexpression=project.version -q -DforceStdout'           
          }
          post{
              success {
