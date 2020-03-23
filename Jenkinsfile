@@ -14,7 +14,8 @@ pipeline {
             git url: 'https://github.com/HenriqueGalli/DeploySnap.git'           
             bat 'mvn clean compile package' 
             //bat' mvn help:evaluate -Dexpression=project.version -q -DforceStdout'
-            echo $POM_VERSION
+            pom = readMavenPom file: 'pom.xml'
+            pom.version
          }
          post{
              success {
