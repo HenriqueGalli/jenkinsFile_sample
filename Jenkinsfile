@@ -10,6 +10,10 @@ pipeline {
     triggers{
         pollSCM('* * * * *')
     }
+     environment {
+      IMAGE = readMavenPom().getArtifactId()
+      VERSION = readMavenPom().getVersion()
+    }
     stages{
       stage('Build') {
          steps {
@@ -20,7 +24,7 @@ pipeline {
          post{
              success {
               echo 'Clean and Compile succes...'
-              
+              echo "${VERSION}"
               }
             }
         }
