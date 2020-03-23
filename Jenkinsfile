@@ -12,7 +12,7 @@ pipeline {
       stage('Build') {
          steps {
             git url: 'https://github.com/HenriqueGalli/DeploySnap.git'
-            bat  'BUILD_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)'
+            bat  'mvn BUILD_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)'
             bat 'mvn clean compile package' 
             echo  $BUILD_VERSION
          }
