@@ -14,14 +14,14 @@ pipeline {
       stage('Build') {
          steps {
             git url: 'https://github.com/HenriqueGalli/DeploySnap.git'   
-           // projectVersion = pom.getVersion()  
+            projectVersion = pom.getVersion()  
             bat 'mvn clean compile package' 
             bat' mvn help:evaluate -Dexpression=project.version -q -DforceStdout'           
          }
          post{
              success {
               echo 'Clean and Compile succes...'
-              //echo "${projectVersion}"
+              echo "${projectVersion}"
               }
             }
         }
