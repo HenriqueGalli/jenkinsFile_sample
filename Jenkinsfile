@@ -17,7 +17,7 @@ pipeline {
          post{
              success {
               echo 'Clean and Compile succes...'
-              bat' mvn help:evaluate -Dexpression=project.version -q -DforceStdout'
+              project_ver = bat' mvn help:evaluate -Dexpression=project.version -q -DforceStdout'
               }
             }
         }
@@ -33,7 +33,7 @@ pipeline {
                   
               }
               failure{
-                  emailext body: 'Deploy do Framework nao foi realizado. \nAnalisar resultados: $BUILD_URL.\n',                                                            
+                  emailext body: 'Deploy do Framework nao foi realizado. \nAnalisar resultados: $BUILD_URL.\n "project_ver"',                                                            
                   subject: 'Deploy Nexus - $BUILD_STATUS', 
                   to: 'henrique.galli@atomicsolutions.com.br'
               }
