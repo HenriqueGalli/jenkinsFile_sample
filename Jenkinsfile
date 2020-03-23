@@ -34,11 +34,11 @@ pipeline {
             post{
                 success{
                     echo 'Get Version Success'
-                    //echo "${TAG_SELECTOR}"
+                    echo "${TAG_SELECTOR}"
                 }
                 failure{
                     echo 'falha'
-                    //echo "${TAG_SELECTOR}"
+                    echo "${TAG_SELECTOR}"
                 }
             }        
         }  
@@ -48,13 +48,13 @@ pipeline {
            }
           post{
               success{
-                  emailext body: 'Deploy do Framework realizado com sucesso.\n Versão do Projeto: "${TAG_SELECTOR}"' ,                            
+                  emailext body: 'Deploy do Framework realizado com sucesso.\n Versão do Projeto: '${TAG_SELECTOR}'' ,                            
                   subject: 'Deploy Nexus - $BUILD_STATUS', 
                   to: 'henrique.galli@atomicsolutions.com.br'
                   
               }
               failure{
-                  emailext body: 'Deploy do Framework nao foi realizado. \nVersão do Projeto: "${TAG_SELECTOR}" \nAnalisar resultados: $BUILD_URL.\n'   ,                                                           
+                  emailext body: 'Deploy do Framework nao foi realizado. \nVersão do Projeto: '${TAG_SELECTOR}' \nAnalisar resultados: $BUILD_URL.\n'   ,                                                           
                   subject: 'Deploy Nexus - $BUILD_STATUS', 
                   to: 'henrique.galli@atomicsolutions.com.br'
               }
