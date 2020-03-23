@@ -45,6 +45,7 @@ pipeline {
       stage('Deploy'){
           steps{          //tentar capturar a versao da pom e exibir em POM_VERSION
                  bat 'mvn deploy' 
+                 echo "${TAG_SELECTOR}"
            }
           post{
               success{
