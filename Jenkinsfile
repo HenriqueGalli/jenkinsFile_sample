@@ -35,7 +35,7 @@ pipeline {
                 }        
             } 
             post{
-                succes{
+                success{
                     echo 'sucesso'
                     echo "${projectVersion}"
                 }
