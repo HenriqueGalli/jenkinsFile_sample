@@ -49,7 +49,7 @@ pipeline {
            }
           post{
               success{
-                  emailext'Deploy do Framework realizado com sucesso. \nVersão do Projeto: ${DEF, DEF=TAG_SELECTOR}',                       
+                  emailext'Deploy do Framework realizado com sucesso. \nVersão do Projeto: "${ENV, Versao=TAG_SELECTOR}"',                       
                   subject: 'Deploy Nexus - $BUILD_STATUS', 
                   to: 'henrique.galli@atomicsolutions.com.br'
                   
