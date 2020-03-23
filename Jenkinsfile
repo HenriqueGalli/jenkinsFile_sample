@@ -4,8 +4,6 @@ pipeline {
 
    tools {
     maven 'localMaven'
-    //pom = readMavenPom file: 'pom.xml'
-    //pom.version
    }
     triggers{
         pollSCM('* * * * *')
@@ -13,13 +11,9 @@ pipeline {
     stages{
       stage('Build') {
          steps {
-            git url: 'https://github.com/HenriqueGalli/DeploySnap.git' 
-            //bat "mvn -N help:effective-pom -Doutput"
-            script{
-                projectVersion = pom.getVersion()  
-            }        
+            git url: 'https://github.com/HenriqueGalli/DeploySnap.git'        
             bat 'mvn clean compile package' 
-            bat' mvn help:evaluate -Dexpression=project.version -q -DforceStdout'           
+            //bat' mvn help:evaluate -Dexpression=project.version -q -DforceStdout'           
          }        
          post{
              success {
