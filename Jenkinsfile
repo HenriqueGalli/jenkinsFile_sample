@@ -14,20 +14,37 @@ pipeline {
       stage('Build') {
          steps {
             git url: 'https://github.com/HenriqueGalli/DeploySnap.git' 
-            bat "mvn -N help:effective-pom -Doutput"
+            //bat "mvn -N help:effective-pom -Doutput"
             script{
                 projectVersion = pom.getVersion()  
             }        
             bat 'mvn clean compile package' 
             bat' mvn help:evaluate -Dexpression=project.version -q -DforceStdout'           
-         }
+         }        
          post{
              success {
-              echo 'Clean and Compile succes...'
-              echo "${projectVersion}"
+              echo 'Clean and Compile succes...'             
               }
             }
         }
+      stage('Get Version'){
+          steps{
+              bat "mvn -N help:effective-pom -Doutput"
+             script{
+                 projectVersion = pom.getVersion()  
+                }        
+            } 
+            post{
+                succes{
+                    echo 'sucesso'
+                    echo "${projectVersion}"
+                }
+                failure{
+                    echo 'falha'
+                    echo "${projectVersion}"
+                }
+            }        
+        }  
       stage('Deploy'){
           steps{          //tentar capturar a versao da pom e exibir em POM_VERSION
                  bat 'mvn deploy' 
