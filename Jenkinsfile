@@ -11,6 +11,7 @@ pipeline {
         pollSCM('* * * * *')
     }
      environment {
+      git url: 'https://github.com/HenriqueGalli/DeploySnap.git' 
       IMAGE = readMavenPom().getArtifactId()
       VERSION = readMavenPom().getVersion()
     }
