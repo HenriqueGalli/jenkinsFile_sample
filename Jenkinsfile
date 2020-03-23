@@ -1,3 +1,4 @@
+def TAG_SELECTOR = "UNINTIALIZED"
 pipeline {
     
    agent any
@@ -24,18 +25,20 @@ pipeline {
       stage('Get Version'){
           steps{
               //bat "mvn -N help:effective-pom -Doutput"
+             bat "mvn --batch-mode -U deploy"
              script{
-                 projectVersion = pom.getVersion()  
+                 TAG_SELECTOR = readMavenPom().getVersion()
+                 //projectVersion = pom.getVersion()  
                 }        
             } 
             post{
                 success{
                     echo 'sucesso'
-                    echo "${projectVersion}"
+                    echo "${TAG_SELECTOR}"
                 }
                 failure{
                     echo 'falha'
-                    echo "${projectVersion}"
+                    echo "${TAG_SELECTOR}"
                 }
             }        
         }  
