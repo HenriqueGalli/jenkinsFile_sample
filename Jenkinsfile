@@ -13,7 +13,8 @@ pipeline {
          steps {
             git url: 'https://github.com/HenriqueGalli/DeploySnap.git'           
             bat 'mvn clean compile package' 
-            bat' mvn help:evaluate -Dexpression=project.version -q -DforceStdout'
+            //bat' mvn help:evaluate -Dexpression=project.version -q -DforceStdout'
+            echo '$POM_VERSION'
          }
          post{
              success {
