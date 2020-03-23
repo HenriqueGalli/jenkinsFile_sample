@@ -11,13 +11,13 @@ pipeline {
     stages{
       stage('Build') {
          steps {
-            git url: 'https://github.com/HenriqueGalli/DeploySnap.git'           
+            git url: 'https://github.com/HenriqueGalli/DeploySnap.git'     
+            bat 'mvn help:evaluate -Dexpression=docker.registry -q -DforceStdout'      
             bat 'mvn clean compile package' 
          }
          post{
              success {
               echo 'Clean and Compile succes...'
-              echo bat mvn help:evaluate -Dexpression=project.version | findstr /R ^^[^^\[INFO\]]
               }
             }
         }
