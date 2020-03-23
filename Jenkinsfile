@@ -17,7 +17,7 @@ pipeline {
          post{
              success {
               echo 'Clean and Compile succes...'
-              echo $BUILD_VERSION
+              bat' mvn help:evaluate -Dexpression=project.version -q -DforceStdout'
               }
             }
         }
@@ -27,7 +27,7 @@ pipeline {
            }
           post{
               success{
-                  emailext body: 'Deploy do Framework realizado com sucesso.\n 'bat' mvn help:evaluate -Dexpression=project.version -q -DforceStdout', 
+                  emailext body: 'Deploy do Framework realizado com sucesso.\n', 
                   subject: 'Deploy Nexus - $BUILD_STATUS', 
                   to: 'henrique.galli@atomicsolutions.com.br'
                   
