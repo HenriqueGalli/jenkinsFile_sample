@@ -4,8 +4,8 @@ pipeline {
 
    tools {
     maven 'localMaven'
-    pom = readMavenPom file: 'pom.xml'
-    pom.version
+    //pom = readMavenPom file: 'pom.xml'
+    //pom.version
    }
     triggers{
         pollSCM('* * * * *')
@@ -15,7 +15,7 @@ pipeline {
          steps {
             git url: 'https://github.com/HenriqueGalli/DeploySnap.git'           
             bat 'mvn clean compile package' 
-            //bat' mvn help:evaluate -Dexpression=project.version -q -DforceStdout'           
+            def _pomVer= bat' mvn help:evaluate -Dexpression=project.version -q -DforceStdout'           
          }
          post{
              success {
