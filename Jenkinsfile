@@ -11,8 +11,7 @@ pipeline {
     stages{
       stage('Build') {
          steps {
-            git url: 'https://github.com/HenriqueGalli/DeploySnap.git'  
-            //project_ver = bat' mvn help:evaluate -Dexpression=project.version -q -DforceStdout'   
+            git url: 'https://github.com/HenriqueGalli/DeploySnap.git'           
             bat 'mvn clean compile package' 
          }
          post{
@@ -28,13 +27,13 @@ pipeline {
            }
           post{
               success{
-                  emailext body: 'Deploy do Framework realizado com sucesso.\n', 
+                  emailext body: bat' mvn help:evaluate -Dexpression=project.version -q -DforceStdout',                             //body: 'Deploy do Framework realizado com sucesso.\n'
                   subject: 'Deploy Nexus - $BUILD_STATUS', 
                   to: 'henrique.galli@atomicsolutions.com.br'
                   
               }
               failure{
-                  emailext body: 'Deploy do Framework nao foi realizado. \nAnalisar resultados: $BUILD_URL.\n',                                                            
+                  emailext body: bat' mvn help:evaluate -Dexpression=project.version -q -DforceStdout'   ,                                                            //Deploy do Framework nao foi realizado. \nAnalisar resultados: $BUILD_URL.\n
                   subject: 'Deploy Nexus - $BUILD_STATUS', 
                   to: 'henrique.galli@atomicsolutions.com.br'
               }
