@@ -14,6 +14,7 @@ pipeline {
       stage('Build') {
          steps {
             git url: 'https://github.com/HenriqueGalli/DeploySnap.git' 
+            bat "mvn -N help:effective-pom -Doutput=target/pom-effective.xml"
             script{
                 projectVersion = pom.getVersion()  
             }        
