@@ -46,7 +46,7 @@ pipeline {
           steps{          //tentar capturar a versao da pom e exibir em POM_VERSION
                  bat 'mvn deploy' 
                  script{
-                     bat "mvn -N help:effective-pom -Doutput"
+                     bat "mvn --batch-mode -U deploy"
                      PROJECT_VERSION = readMavenPom().getVersion()
                      projectVersion = pom.getVersion()  
                  }
