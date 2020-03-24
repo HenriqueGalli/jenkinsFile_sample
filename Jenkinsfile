@@ -29,7 +29,7 @@ pipeline {
              script{
                   PROJECT_VERSION = readMavenPom().getVersion()             
                 }   
-               bat "setx TEST_VERSION ${PROJECT_VERSION}"                   
+               bat "setx TEST_VERSION ${PROJECT_VERSION} /M"                   
             } 
 
              post{
