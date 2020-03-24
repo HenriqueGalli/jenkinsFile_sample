@@ -1,4 +1,4 @@
-//def PROJECT_VERSION = "UNINTIALIZED"     
+def PROJECT_VERSION = "UNINTIALIZED"     
 pipeline {
     
    agent any
@@ -45,12 +45,16 @@ pipeline {
       stage('Deploy'){
           steps{          //tentar capturar a versao da pom e exibir em POM_VERSION
                  bat 'mvn deploy' 
+                 script{
+                     PROJECT_VERSION = readMavenPom().getVersion()
+                     //projectVersion = pom.getVersion()  
+                 }
            }
           post{
               success{                
                 
                   emailext body: readFile("C:/Users/Atomic/Desktop/jenkinsFile_sample/Novo e-mail.html"),                       //Deploy do Framework realizado com sucesso. \nVersão do Projeto: 
-                  subject: "Deploy Nexus - '${readMavenPom().getVersion()}'", 
+                  subject: "Deploy Nexus - $BUILD_STATUS -'${readMavenPom().getVersion()}'", 
                   to: 'henrique.galli@atomicsolutions.com.br'
                   
               }
