@@ -1,4 +1,4 @@
-def projectVersion = "UNINTIALIZED"     
+def PROJECT_VERSION = "UNINTIALIZED"     
 pipeline {
     
    agent any
