@@ -40,7 +40,7 @@ pipeline {
                 }
                 failure{
                     echo 'falha'
-                    echo echo $TEST_VERSION 
+                    echo "$TEST_VERSION"  
                 }
             }        
         }  
