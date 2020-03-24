@@ -29,9 +29,10 @@ pipeline {
              script{
                   PROJECT_VERSION = readMavenPom().getVersion()             
                 }   
-               bat "set TEST_VERSION ${PROJECT_VERSION}"     
+               bat "set TEST_VERSION ${PROJECT_VERSION}" 
+               echo $TEST_VERSION    
             } 
-            echo $TEST_VERSION
+
              post{
                 success{
                     echo 'Get Version Success'
