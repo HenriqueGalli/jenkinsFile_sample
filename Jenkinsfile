@@ -1,4 +1,4 @@
-def TAG_SELECTOR = "UNINTIALIZED"     
+def projVer = "UNINTIALIZED"     
 pipeline {
     
    agent any
@@ -27,35 +27,35 @@ pipeline {
               //bat "mvn -N help:effective-pom -Doutput"
              bat "mvn --batch-mode -U deploy"
              script{
-                 TAG_SELECTOR = readMavenPom().getVersion()
+                 projVer = readMavenPom().getVersion()
                  //projectVersion = pom.getVersion()  
                 }        
             } 
             post{
                 success{
                     echo 'Get Version Success'
-                    echo "${TAG_SELECTOR}"
+                    echo "${projVer}"
                 }
                 failure{
                     echo 'falha'
-                    echo "${TAG_SELECTOR}"
+                    echo "${projVer}"
                 }
             }        
         }  
       stage('Deploy'){
           steps{          //tentar capturar a versao da pom e exibir em POM_VERSION
                  bat 'mvn deploy' 
-                 echo "${TAG_SELECTOR}"
+                 echo "${projVer}"
            }
           post{
               success{
-                  emailext body: '''${ENV,var="TAG_SELECTOR"}''',                       //Deploy do Framework realizado com sucesso. \nVersão do Projeto: 
+                  emailext body: '''${ENV,var="projVer"}''',                       //Deploy do Framework realizado com sucesso. \nVersão do Projeto: 
                   subject: 'Deploy Nexus - $BUILD_STATUS', 
                   to: 'henrique.galli@atomicsolutions.com.br'
                   
               }
               failure{
-                  emailext body: 'Deploy do Framework nao foi realizado. \nVersão do Projeto: $TAG_SELECTOR \nAnalisar resultados: $BUILD_URL.\n'   ,                                                           
+                  emailext body: 'Deploy do Framework nao foi realizado. \nVersão do Projeto: $projVer \nAnalisar resultados: $BUILD_URL.\n'   ,                                                           
                   subject: 'Deploy Nexus - $BUILD_STATUS', 
                   to: 'henrique.galli@atomicsolutions.com.br'
               }
