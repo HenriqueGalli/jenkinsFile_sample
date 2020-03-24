@@ -47,14 +47,14 @@ pipeline {
                  bat 'mvn deploy' 
                  echo "${PROJECT_VERSION}"
                  script{
-                   def ver = env.PROJECT_VERSION
+                   def ver = PROJECT_VERSION
                  }
            }
           post{
               success{                
                 
                   emailext body: readFile("C:/Users/Atomic/Desktop/jenkinsFile_sample/Novo e-mail.html"),                       //Deploy do Framework realizado com sucesso. \nVersão do Projeto: 
-                  subject: "Deploy Nexus - '${ver}'", 
+                  subject: "Deploy Nexus - '${env.ver}'", 
                   to: 'henrique.galli@atomicsolutions.com.br'
                   
               }
