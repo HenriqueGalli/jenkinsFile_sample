@@ -46,10 +46,10 @@ pipeline {
           steps{          //tentar capturar a versao da pom e exibir em POM_VERSION
                  bat 'mvn deploy' 
                  echo "${PROJECT_VERSION}"
+                 def ver = env.PROJECT_VERSION
            }
           post{
-              success{
-                  def ver = env.PROJECT_VERSION
+              success{                
                 
                   emailext body: readFile("C:/Users/Atomic/Desktop/jenkinsFile_sample/Novo e-mail.html"),                       //Deploy do Framework realizado com sucesso. \nVersão do Projeto: 
                   subject: "Deploy Nexus - '${ver}'", 
