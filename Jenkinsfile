@@ -5,6 +5,7 @@ pipeline {
 
    tools {
     maven 'localMaven'
+    def TAG_SELECTOR = "UNINTIALIZED"
    }
     triggers{
         pollSCM('* * * * *')
@@ -49,7 +50,7 @@ pipeline {
            }
           post{
               success{
-                  emailext body: '''${TOKEN, version= "TAG_SELECTOR"}''',                       //Deploy do Framework realizado com sucesso. \nVersão do Projeto: 
+                  emailext body: '''${ENV,var="TAG_SELECTOR"}''',                       //Deploy do Framework realizado com sucesso. \nVersão do Projeto: 
                   subject: 'Deploy Nexus - $BUILD_STATUS', 
                   to: 'henrique.galli@atomicsolutions.com.br'
                   
