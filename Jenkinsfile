@@ -1,4 +1,3 @@
-def TAG_SELECTOR = "UNINTIALIZED"
 pipeline {
     
    agent any
