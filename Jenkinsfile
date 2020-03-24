@@ -46,6 +46,7 @@ pipeline {
           steps{          //tentar capturar a versao da pom e exibir em POM_VERSION
                  bat 'mvn deploy' 
                  script{
+                     bat "mvn -N help:effective-pom -Doutput"
                      PROJECT_VERSION = readMavenPom().getVersion()
                      projectVersion = pom.getVersion()  
                  }
@@ -54,7 +55,7 @@ pipeline {
               success{                
                 
                   emailext body: readFile("C:/Users/Atomic/Desktop/jenkinsFile_sample/Novo e-mail.html"),                       //Deploy do Framework realizado com sucesso. \nVersão do Projeto: 
-                  subject: 'Deploy Nexus - $BUILD_STATUS -"${readMavenPom().getVersion()}"', 
+                  subject: 'Deploy Nexus - $BUILD_STATUS ', 
                   to: 'henrique.galli@atomicsolutions.com.br'
                   
               }
