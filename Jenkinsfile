@@ -29,8 +29,8 @@ pipeline {
              script{
                   PROJECT_VERSION = readMavenPom().getVersion()             
                 }   
-               bat "set TEST_VERSION ${PROJECT_VERSION}" 
-               echo $TEST_VERSION    
+               bat "setx TEST_VERSION ${PROJECT_VERSION}" 
+                  
             } 
 
              post{
@@ -40,7 +40,7 @@ pipeline {
                 }
                 failure{
                     echo 'falha'
-                    echo "${PROJECT_VERSION}"
+                    echo echo $TEST_VERSION 
                 }
             }        
         }  
