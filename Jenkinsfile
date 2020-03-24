@@ -22,39 +22,34 @@ pipeline {
               }
             }
         }
-      //stage('Get Version'){
-       //   steps{
-              //bat "mvn -N help:effective-pom -Doutput"
-             //bat "mvn --batch-mode -U deploy"
-        //     script{
-        //         PROJECT_VERSION = readMavenPom().getVersion()
-                 //projectVersion = pom.getVersion()  
-        //        }        
-        //    } 
-        //    post{
-        //        success{
-        //            echo 'Get Version Success'
-        //            echo "${PROJECT_VERSION}"
-        //        }
-        //        failure{
-        //            echo 'falha'
-        //            echo "${PROJECT_VERSION}"
-        //        }
-        //    }        
-        //}  
+      stage('Get Version'){
+          steps{
+              bat "mvn -N help:effective-pom -Doutput"
+              //bat "mvn --batch-mode -U deploy"
+             script{
+                  PROJECT_VERSION = readMavenPom().getVersion()             
+                }   
+               bat "set TEST_VERSION ${PROJECT_VERSION}"     
+            } 
+            echo $TEST_VERSION
+             post{
+                success{
+                    echo 'Get Version Success'
+                    echo "${PROJECT_VERSION}"
+                }
+                failure{
+                    echo 'falha'
+                    echo "${PROJECT_VERSION}"
+                }
+            }        
+        }  
       stage('Deploy'){
           steps{          //tentar capturar a versao da pom e exibir em POM_VERSION
-                 bat 'mvn deploy' 
-                 
+                 bat 'mvn deploy'                
            }
           post{
               success{                
-                script{
-                     bat "mvn --batch-mode -U deploy"
-                     PROJECT_VERSION = readMavenPom().getVersion()
-                    // projectVersion = pom.getVersion()  
-                 }
-                 echo "${PROJECT_VERSION}"
+                 echo "${TEST_VERSION}"
                   emailext body: readFile("C:/Users/Atomic/Desktop/jenkinsFile_sample/Novo e-mail.html"),                       //Deploy do Framework realizado com sucesso. \nVersão do Projeto: 
                   subject: 'Deploy Nexus - $BUILD_STATUS ', 
                   to: 'henrique.galli@atomicsolutions.com.br'
