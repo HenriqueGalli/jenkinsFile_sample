@@ -4,14 +4,14 @@ pipeline {
 
    tools {
     maven 'localMaven'
-    def TAG_SELECTOR = "UNINTIALIZED"
-   }
+       }
     triggers{
         pollSCM('* * * * *')
     }
     stages{
       stage('Build') {
          steps {
+            def TAG_SELECTOR = "UNINTIALIZED"
             git url: 'https://github.com/HenriqueGalli/DeploySnap.git'        
             bat 'mvn clean compile package' 
             //bat' mvn help:evaluate -Dexpression=project.version -q -DforceStdout'           
