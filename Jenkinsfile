@@ -46,7 +46,9 @@ pipeline {
           steps{          //tentar capturar a versao da pom e exibir em POM_VERSION
                  bat 'mvn deploy' 
                  echo "${PROJECT_VERSION}"
-                 def ver = env.PROJECT_VERSION
+                 script{
+                   def ver = env.PROJECT_VERSION
+                 }
            }
           post{
               success{                
