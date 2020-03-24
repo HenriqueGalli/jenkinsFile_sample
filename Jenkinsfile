@@ -48,8 +48,9 @@ pipeline {
                  script{
                      bat "mvn --batch-mode -U deploy"
                      PROJECT_VERSION = readMavenPom().getVersion()
-                     projectVersion = pom.getVersion()  
+                    // projectVersion = pom.getVersion()  
                  }
+                 echo "${PROJECT_VERSION}"
            }
           post{
               success{                
