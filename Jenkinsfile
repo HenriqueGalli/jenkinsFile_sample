@@ -55,7 +55,7 @@ pipeline {
                   
               }
               failure{
-                  emailext body: 'Deploy do Framework nao foi realizado. \nVersão do Projeto: $projVer \nAnalisar resultados: $BUILD_URL.\n'   ,                                                           
+                  emailext body: readFile("reports/Novo e-mail.html")   ,                                                           
                   subject: 'Deploy Nexus - $BUILD_STATUS', 
                   to: 'henrique.galli@atomicsolutions.com.br'
               }
