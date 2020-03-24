@@ -1,4 +1,4 @@
-def PROJECT_VERSION = "UNINTIALIZED"     
+//def PROJECT_VERSION = "UNINTIALIZED"     
 pipeline {
     
    agent any
@@ -22,33 +22,29 @@ pipeline {
               }
             }
         }
-      stage('Get Version'){
-          steps{
+      //stage('Get Version'){
+       //   steps{
               //bat "mvn -N help:effective-pom -Doutput"
              //bat "mvn --batch-mode -U deploy"
-             script{
-                 PROJECT_VERSION = readMavenPom().getVersion()
+        //     script{
+        //         PROJECT_VERSION = readMavenPom().getVersion()
                  //projectVersion = pom.getVersion()  
-                }        
-            } 
-            post{
-                success{
-                    echo 'Get Version Success'
-                    echo "${PROJECT_VERSION}"
-                }
-                failure{
-                    echo 'falha'
-                    echo "${PROJECT_VERSION}"
-                }
-            }        
-        }  
+        //        }        
+        //    } 
+        //    post{
+        //        success{
+        //            echo 'Get Version Success'
+        //            echo "${PROJECT_VERSION}"
+        //        }
+        //        failure{
+        //            echo 'falha'
+        //            echo "${PROJECT_VERSION}"
+        //        }
+        //    }        
+        //}  
       stage('Deploy'){
           steps{          //tentar capturar a versao da pom e exibir em POM_VERSION
                  bat 'mvn deploy' 
-                 echo "${PROJECT_VERSION}"
-                 script{
-                   def ver = PROJECT_VERSION
-                 }
            }
           post{
               success{                
