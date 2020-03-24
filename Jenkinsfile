@@ -1,3 +1,4 @@
+def TAG_SELECTOR = "UNINTIALIZED"     
 pipeline {
     
    agent any
@@ -10,15 +11,14 @@ pipeline {
     }
     stages{
       stage('Build') {
-         steps {
-            def TAG_SELECTOR = "UNINTIALIZED"
+         steps {           
             git url: 'https://github.com/HenriqueGalli/DeploySnap.git'        
             bat 'mvn clean compile package' 
             //bat' mvn help:evaluate -Dexpression=project.version -q -DforceStdout'           
          }        
          post{
              success {
-              echo 'Clean and Compile succes...'             
+              echo 'Clean and Compile succes...'        
               }
             }
         }
