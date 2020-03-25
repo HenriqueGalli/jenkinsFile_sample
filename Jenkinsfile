@@ -26,7 +26,7 @@ pipeline {
       stage('Get Version'){
           steps{
               environment {
-                def PROJECT_VERSION = "UNINTIALIZED"  
+                PROJECT_VERSION = "UNINTIALIZED"  
               }
               bat "mvn -N help:effective-pom -Doutput"
               //bat "mvn --batch-mode -U deploy"
