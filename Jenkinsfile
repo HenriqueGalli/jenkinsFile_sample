@@ -25,7 +25,7 @@ pipeline {
       stage('Get Version'){
           steps{
               bat "mvn -N help:effective-pom -Doutput"
-              bat "mvn --batch-mode -U deploy"
+              //bat "mvn --batch-mode -U deploy"
              script{
                   PROJECT_VERSION = readMavenPom().getVersion()             
                 }   
