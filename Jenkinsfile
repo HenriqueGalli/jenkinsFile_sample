@@ -32,13 +32,8 @@ pipeline {
                                  
             } 
             post{
-                success{
-                    echo 'Get Version Success'
-                    echo "$PROJECT_VERSION"
-                }
-                failure{
-                    echo 'falha'
-                    echo "$PROJECT_VERSION"  
+                always{
+                    echo "${PROJECT_VERSION}"
                 }
             }        
         }  
