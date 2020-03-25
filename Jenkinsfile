@@ -33,7 +33,15 @@ pipeline {
             } 
             post{
                 always{
-                    echo "${PROJECT_VERSION}"
+                    script{
+                        import hudson.model.*;
+                        import hudson.util.*;
+                        def thr = Thread.currentThread();
+                        def currentBuild = thr?.executable;
+                        def mavenVer = currentBuild.getParent().getModules().toArray()[0].getVersion();
+                        def newParamAction = new hudson.model.ParametersAction(new hudson.model.StringParameterValue("MAVEN_VERSION", mavenVer));
+                        currentBuild.addAction(newParamAction);
+                    }
                 }
             }        
         }  
@@ -47,7 +55,7 @@ pipeline {
       stage('Deploy'){
           steps{          //tentar capturar a versao da pom e exibir em POM_VERSION
                  bat 'mvn deploy' 
-                 bat "setx TESTVERSION ${PROJECT_VERSION} /M"                       
+                 //bat "setx TESTVERSION ${PROJECT_VERSION} /M"                       
            }
           post{
               success{   
