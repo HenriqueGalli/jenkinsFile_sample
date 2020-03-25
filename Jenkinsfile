@@ -45,11 +45,13 @@ pipeline {
         }  
       stage('Deploy'){
           steps{          //tentar capturar a versao da pom e exibir em POM_VERSION
-                 bat 'mvn deploy'   
-                 bat "setx TEST_VERSION ${PROJECT_VERSION} /M"              
+                 bat 'mvn deploy'                      
            }
           post{
-              success{                
+              success{   
+                  script{
+                         bat "setx TEST_VERSION ${PROJECT_VERSION} /M" 
+                  }             
                   echo "$TEST_VERSION"
                   emailext body: readFile("C:/Users/Atomic/Desktop/jenkinsFile_sample/Novo e-mail.html"),                       //Deploy do Framework realizado com sucesso. \nVersão do Projeto: 
                   subject: 'Deploy Nexus - $BUILD_STATUS ', 
