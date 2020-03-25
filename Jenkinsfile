@@ -12,8 +12,11 @@ pipeline {
     stages{
       stage('Build') {
             
-         steps {       
-            def PROJECT_VERSION = "UNINTIALIZED"    
+         steps {    
+             script{
+                def PROJECT_VERSION = "UNINTIALIZED"    
+             }   
+           
             git url: 'https://github.com/HenriqueGalli/DeploySnap.git'        
             bat 'mvn clean compile package' 
             //bat' mvn help:evaluate -Dexpression=project.version -q -DforceStdout'           
