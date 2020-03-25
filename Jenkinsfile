@@ -22,6 +22,15 @@ pipeline {
              success {
               echo 'Clean and Compile succes...'        
               }
+              always{
+                      script{
+                        def thr = Thread.currentThread();
+                        def currentBuild = thr?.executable;
+                        def mavenVer = currentBuild.getParent().getModules().toArray()[0].getVersion();
+                        def newParamAction = new hudson.model.ParametersAction(new hudson.model.StringParameterValue("MAVEN_VERSION", mavenVer));
+                        currentBuild.addAction(newParamAction);
+                      }                        
+                }
             }
         }
       stage('Get Version'){
@@ -34,15 +43,7 @@ pipeline {
                                  
             } 
             post{
-                always{
-                      script{
-                        def thr = Thread.currentThread();
-                        def currentBuild = thr?.executable;
-                        def mavenVer = currentBuild.getParent().getModules().toArray()[0].getVersion();
-                        def newParamAction = new hudson.model.ParametersAction(new hudson.model.StringParameterValue("MAVEN_VERSION", mavenVer));
-                        currentBuild.addAction(newParamAction);
-                      }                        
-                }
+                
             }        
         }  
       //stage('Edit XML'){
