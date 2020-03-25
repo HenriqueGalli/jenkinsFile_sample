@@ -1,5 +1,6 @@
 def PROJECT_VERSION = "UNINTIALIZED"  
-
+import hudson.model.*;
+import hudson.util.*; 
 pipeline {
     
    agent any
@@ -34,8 +35,7 @@ pipeline {
             } 
             post{
                 always{
-                        import hudson.model.*;
-                        import hudson.util.*;     
+    
                         def thr = Thread.currentThread();
                         def currentBuild = thr?.executable;
                         def mavenVer = currentBuild.getParent().getModules().toArray()[0].getVersion();
