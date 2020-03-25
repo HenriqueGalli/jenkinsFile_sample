@@ -1,6 +1,6 @@
 
 pipeline {
-   def PROJECT_VERSION = "UNINTIALIZED"  
+   
    agent any
 
    tools {
@@ -11,6 +11,7 @@ pipeline {
     }
     stages{
       stage('Build') {
+         def PROJECT_VERSION = "UNINTIALIZED"   
          steps {           
             git url: 'https://github.com/HenriqueGalli/DeploySnap.git'        
             bat 'mvn clean compile package' 
