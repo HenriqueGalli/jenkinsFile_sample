@@ -12,11 +12,7 @@ pipeline {
     stages{
       stage('Build') {
             
-         steps {    
-             script{
-                def PROJECT_VERSION = "UNINTIALIZED"    
-             }   
-           
+         steps {               
             git url: 'https://github.com/HenriqueGalli/DeploySnap.git'        
             bat 'mvn clean compile package' 
             //bat' mvn help:evaluate -Dexpression=project.version -q -DforceStdout'           
@@ -25,17 +21,19 @@ pipeline {
              success {
               echo 'Clean and Compile succes...'        
               }
-              always{
-                   echo "Versao na stage Build ${PROJECT_VERSION}"  
-              }
             }
         }
       stage('Get Version'){
           steps{
+              environment {
+                def PROJECT_VERSION = "UNINTIALIZED"  
+              }
               bat "mvn -N help:effective-pom -Doutput"
               //bat "mvn --batch-mode -U deploy"
              script{
-                  PROJECT_VERSION = readMavenPom().getVersion()             
+                  echo "Versão na stage Get Version antes do script ${PROJECT_VERSION}"     
+                  PROJECT_VERSION = readMavenPom().getVersion()  
+                  echo "Versão na stage Get Version depois do script ${PROJECT_VERSION}"             
                 }                      
             } 
             post{
