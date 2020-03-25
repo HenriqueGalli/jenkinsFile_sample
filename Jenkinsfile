@@ -1,8 +1,6 @@
-def PROJECT_VERSION = "UNINTIALIZED"  
-import hudson.model.*;
-import hudson.util.*; 
+
 pipeline {
-    
+   def PROJECT_VERSION = "UNINTIALIZED"  
    agent any
 
    tools {
@@ -23,14 +21,8 @@ pipeline {
               echo 'Clean and Compile succes...'        
               }
               always{
-                      script{
-                        def thr = Thread.currentThread();
-                        def currentBuild = thr?.executable;
-                        def mavenVer = currentBuild.getParent().getModules().toArray()[0].getVersion();
-                        def newParamAction = new hudson.model.ParametersAction(new hudson.model.StringParameterValue("MAVEN_VERSION", mavenVer));
-                        currentBuild.addAction(newParamAction);
-                      }                        
-                }
+                   echo "Versao na stage Build ${PROJECT_VERSION}"  
+              }
             }
         }
       stage('Get Version'){
@@ -39,23 +31,15 @@ pipeline {
               //bat "mvn --batch-mode -U deploy"
              script{
                   PROJECT_VERSION = readMavenPom().getVersion()             
-                }   
-                                 
+                }                      
             } 
             post{
-                success{
-                        echo "${PROJECT_VERSION}"   
+                always{
+                        echo "Versão na stage Get Version ${PROJECT_VERSION}"   
                 }
                 
             }        
         }  
-      //stage('Edit XML'){
-      //      steps{
-      //          script{
-      //              def file = new File 'exemploXMLVERSAO.xml'
-      //          }
-      //      }
-      //  } 
       stage('Deploy'){
           steps{          //tentar capturar a versao da pom e exibir em POM_VERSION
                  bat 'mvn deploy' 
