@@ -46,9 +46,7 @@ pipeline {
       stage('Deploy'){
           steps{          //tentar capturar a versao da pom e exibir em POM_VERSION
                  bat 'mvn deploy' 
-                    script{
-                         bat "setx TESTVERSION ${PROJECT_VERSION} /M" 
-                  }                       
+                 bat "setx TESTVERSION ${PROJECT_VERSION} /M"                       
            }
           post{
               success{   
