@@ -50,9 +50,9 @@ pipeline {
           post{
               success{   
                   script{
-                         bat "setx TEST_VERSION ${PROJECT_VERSION} /M" 
+                         bat "setx TESTVERSION ${PROJECT_VERSION} /M" 
                   }             
-                  echo "$TEST_VERSION"
+                  echo "$TESTVERSION"
                   emailext body: readFile("C:/Users/Atomic/Desktop/jenkinsFile_sample/Novo e-mail.html"),                       //Deploy do Framework realizado com sucesso. \nVersão do Projeto: 
                   subject: 'Deploy Nexus - $BUILD_STATUS ', 
                   to: 'henrique.galli@atomicsolutions.com.br'
