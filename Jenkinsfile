@@ -35,11 +35,11 @@ pipeline {
              post{
                 success{
                     echo 'Get Version Success'
-                    echo "$TEST_VERSION"
+                    echo "$PROJECT_VERSION"
                 }
                 failure{
                     echo 'falha'
-                    echo "$TEST_VERSION"  
+                    echo "$PROJECT_VERSION"  
                 }
             }        
         }  
