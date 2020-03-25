@@ -24,10 +24,10 @@ pipeline {
             }
         }
       stage('Get Version'){
-          steps{
               environment {
                 PROJECT_VERSION = "UNINTIALIZED"  
               }
+         steps{         
               bat "mvn -N help:effective-pom -Doutput"
               //bat "mvn --batch-mode -U deploy"
              script{
