@@ -42,7 +42,13 @@ pipeline {
                 }
             }        
         }  
- 
+      //stage('Edit XML'){
+      //      steps{
+      //          script{
+      //              def file = new File 'exemploXMLVERSAO.xml'
+      //          }
+      //      }
+      //  } 
       stage('Deploy'){
           steps{          //tentar capturar a versao da pom e exibir em POM_VERSION
                  bat 'mvn deploy' 
@@ -50,7 +56,7 @@ pipeline {
            }
           post{
               success{   
-                  emailext body: 'Deploy do Framework realizado com sucesso. \nVersão do Projeto: 'readMavenPom().getVersion()'',    //readFile("C:/Users/Atomic/Desktop/jenkinsFile_sample/Novo e-mail.html"),                       //Deploy do Framework realizado com sucesso. \nVersão do Projeto: 
+                  emailext body: readFile("C:/Users/Atomic/Desktop/jenkinsFile_sample/Novo e-mail.html"),                       //Deploy do Framework realizado com sucesso. \nVersão do Projeto: 
                   subject: 'Deploy Nexus - $BUILD_STATUS ', 
                   to: 'henrique.galli@atomicsolutions.com.br'
                   
