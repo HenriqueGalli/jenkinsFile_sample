@@ -43,7 +43,7 @@ pipeline {
                                  
             } 
             post{
-                
+                echo "${PROJECT_VERSION}"
             }        
         }  
       //stage('Edit XML'){
