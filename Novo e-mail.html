@@ -60,7 +60,16 @@ a[x-apple-data-detectors] {
 
  </head> 
  <body style="width:100%;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;padding:0;Margin:0;"> 
+  <%
+  def envOverrides = it.getAction("org.jenkinsci.plugins.workflow.cps.EnvActionImpl").getOverriddenEnvironment()
+   version =  envOverrides["PROJECT_VERSION"]
+  %>
+  <%
+    import hudson.model.*
+    def VERSAO_BUILD= build.getEnvVars()["PROJECT_VERSION"];
+  %>
   <div class="es-wrapper-color" style="background-color:#FFFFFF;"> 
+  
    <!--[if gte mso 9]>
 			<v:background xmlns:v="urn:schemas-microsoft-com:vml" fill="t">
 				<v:fill type="tile" color="#ffffff"></v:fill>
@@ -120,11 +129,11 @@ a[x-apple-data-detectors] {
                       <td align="center" style="padding:0;Margin:0;padding-bottom:10px;padding-top:25px;"><h2 style="Margin:0;line-height:34px;mso-line-height-rule:exactly;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;font-size:28px;font-style:normal;font-weight:bold;color:#444444;">Versão atual da Framework:</h2></td> 
                      </tr> 
                      <tr style="border-collapse:collapse;"> 
-					 <td align="center" style="padding:0;Margin:0;padding-bottom:10px;padding-top:15px;"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:26px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:39px;color:#999999;">Tentativa 1: <strong>${PROJECT_VERSION}</strong></p></td> 
+					 <td align="center" style="padding:0;Margin:0;padding-bottom:10px;padding-top:15px;"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:26px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:39px;color:#999999;">Tentativa 1: <strong><% System.getProperty("version"); %></strong></p></td> 
 					  </br>
-					  <td align="center" style="padding:0;Margin:0;padding-bottom:10px;padding-top:15px;"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:26px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:39px;color:#999999;">Tentativa 2: <strong>${env.PROJECT_VERSION}</strong></p></td> 
+					  <td align="center" style="padding:0;Margin:0;padding-bottom:10px;padding-top:15px;"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:26px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:39px;color:#999999;">Tentativa 2: <strong>${version}</strong></p></td> 
 					  </br>
-					  <td align="center" style="padding:0;Margin:0;padding-bottom:10px;padding-top:15px;"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:26px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:39px;color:#999999;">Tentativa 3: <strong>$PROJECT_VERSION</strong></p></td> 
+					  <td align="center" style="padding:0;Margin:0;padding-bottom:10px;padding-top:15px;"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:26px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:39px;color:#999999;">Tentativa 3: <strong>$VERSAO_BUILD</strong></p></td> 
                      </tr> 
                    </table></td> 
                  </tr> 

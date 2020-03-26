@@ -24,25 +24,21 @@ pipeline {
             }
         }
       stage('Get Version'){
-              environment {
-                PROJECT_VERSION = "UNINTIALIZED"  
-              }
-         steps{         
+          
+          env.PROJECT_VERSION = "UNINTIALIZED"  
+            
+          steps{
               bat "mvn -N help:effective-pom -Doutput"
               //bat "mvn --batch-mode -U deploy"
              script{
-                  echo "Versão na stage Get Version antes do script ${PROJECT_VERSION}"     
-                  PROJECT_VERSION = readMavenPom().getVersion()  
-                  echo "Versão na stage Get Version depois do script ${PROJECT_VERSION}"             
-                }                      
-            } 
-            post{
-                always{
-                        echo "Versão na stage Get Version ${PROJECT_VERSION}"   
-                }
-                
-            }        
-        }  
+                    echo "Version antes SEM o ENV ${PROJECT_VERSION}"
+                    echo "Version antes COM ENV ${env.PROJECT_VERSION}"
+                    env.PROJECT_VERSION = readMavenPom().getVersion()      
+                    echo "Version depois COM ENV ${env.PROJECT_VERSION}"
+                    echo "Version depois SEM ENV ${PROJECT_VERSION}"
+                }                                    
+            }       
+        } 
       stage('Deploy'){
           steps{          //tentar capturar a versao da pom e exibir em POM_VERSION
                  bat 'mvn deploy' 
