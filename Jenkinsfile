@@ -1,4 +1,4 @@
-
+def env.PROJECT_VERSION = "UNINTIALIZED"
 pipeline {
    
    agent any
@@ -23,10 +23,7 @@ pipeline {
               }
             }
         }
-      stage('Get Version'){
-          
-          env.PROJECT_VERSION = "UNINTIALIZED"  
-            
+      stage('Get Version'){     
           steps{
               bat "mvn -N help:effective-pom -Doutput"
               //bat "mvn --batch-mode -U deploy"
